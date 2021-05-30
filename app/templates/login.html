@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.svg') }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/constants.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+
+<body>
+
+    <form action="{{ url_for('login_form') }}" method="post" class="authForm">
+        <h1>Accedi</h1>
+
+        {% if "msg" in request.args %}
+        <p class="error">{{ request.args["msg"] }}</p>
+        {% endif %}
+
+        <label for="emailInput">E-Mail</label>
+        <input name="emailInput" type="email" id="emailInput" placeholder="E-Mail">
+
+        <label for="passwordInput">Password</label>
+        <input name="passwordInput" type="password" id="passwordInput" placeholder="Password">
+
+        <button type="submit">Accedi</button>
+        <a href="{{ url_for('signup_page') }}">Non hai un profilo? Registrati.</a>
+    </form>
+
+</body>
+
+</html>

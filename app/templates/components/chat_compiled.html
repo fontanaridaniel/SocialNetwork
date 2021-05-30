@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.svg') }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/constants.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile_component.css') }}">
+
+    <!-- JS -->
+    <script src="https://kit.fontawesome.com/100b505ca0.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+
+</head>
+
+<body onload="loadedPage()">
+    <input id="compiled" type="hidden" value="compiled">
+    <div class="wrapper">
+        <div class="left">
+            <div class="logo">
+                <div class="link">
+                    <a href="{% if current_user.isAdmin() %}
+                    {{ url_for('admin_page') }}
+                    {% else %}
+                    {{ url_for('home_page') }}
+                    {% endif %}" class="logo">
+                        <svg width="50px" height="50px" id="Layer_1" data-name="Layer 1"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 866.03 966.51">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill: #fff;
+                                    }
+                                </style>
+                            </defs>
+                            <path class="cls-1"
+                                d="M878.9,218.76,554.11,31.24a108.23,108.23,0,0,0-108.22,0L121.1,218.76A108.23,108.23,0,0,0,67,312.49v375a108.23,108.23,0,0,0,54.11,93.73L445.89,968.76a108.23,108.23,0,0,0,108.22,0L878.9,781.24A108.23,108.23,0,0,0,933,687.51v-375A108.23,108.23,0,0,0,878.9,218.76ZM775.8,628a54.12,54.12,0,0,1-27.06,46.87l-221.68,128a54.16,54.16,0,0,1-54.12,0l-24-13.86a54.12,54.12,0,0,0-60.3,4.16L299,862.9a8,8,0,0,1-12.84-7.41L301.8,743a54.12,54.12,0,0,0-26.54-54.3l-24-13.85A54.12,54.12,0,0,1,224.2,628V372a54.12,54.12,0,0,1,27.06-46.87l221.68-128a54.16,54.16,0,0,1,54.12,0l221.68,128A54.12,54.12,0,0,1,775.8,372Z"
+                                transform="translate(-66.99 -16.74)" />
+                        </svg>
+                </div>
+            </div>
+            <div class="menu">
+                <div class="link">
+                    <a href="{{ url_for('home_page') }}">
+                        <i class="fas fa-home"></i>
+                        <p>Home</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="{{ url_for('category_page') }}">
+                        <i class="fas fa-boxes"></i>
+                        <p>Categorie</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="{{ url_for('likes_page') }}">
+                        <i class="fas fa-heart"></i>
+                        <p>Mi piace</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a class="active" href="{{ url_for('chat_page_noParams') }}">
+                        <i class="fas fa-comments"></i>
+                        <p>Messaggi</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="{{ url_for('myProfile_page') }}">
+                        <i class="fas fa-user"></i>
+                        <p>Profilo</p>
+                    </a>
+                </div>
+                <div class="link logoutInMenu">
+                    <a href="{{ url_for('logout_page') }}">
+                        <i class="fas fa-power-off"></i>
+                        <p>Log out</p>
+                    </a>
+                </div>
+            </div>
+            <div class="logout">
+                <div class="link">
+                    <a href="{{ url_for('logout_page') }}">
+                        <i class="fas fa-power-off"></i>
+                        <p>Log out</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="center centerWithRightFixed">
+            <div class="chatContainer">
+                <div id="chatLeft" class="chatLeft" style="visibility:hidden;">
+
+                    <h1>Chat</h1>
+                    <input type="hidden" id="id_chat" value="{{ id_chat }}">
+                    <input type="hidden" id="id_user" value="{{ current_user.id }}">
+                    <ul id="chatList">
+                        {% for chat in chatList %}
+                        <a id="idLoadChat"
+                            href="javascript: loadChat('{{ chat[0] }}','{{ chat[1].username }}','{{ current_user.id }}')">
+                            <li>
+                                <div class="userImage"><img
+                                        src="{{ url_for('static', filename='users/' + chat[1].username + '/imageUser.jpg') }}"
+                                        alt="userImage"></div>
+                                <div class="userName">
+                                    <p>{{ chat[1].name }} {{ chat[1].lastname }}</p>
+                                </div>
+                                <div class="time">
+                                    <p>09:52</p>
+                                </div>
+                                <div class="openChat"><i class="fas fa-arrow-right"></i></div>
+                            </li>
+                        </a>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+                <div id="chatRight" class="chatRight" style="visibility:hidden;">
+
+                    <div class="chatNavbar">
+                        <div class="back"><a href="javascript:returnOnChatListMobile();"><i
+                                    class="fas fa-arrow-left"></i></a></div>
+                        <div class="userImage"><img
+                                src="{{ url_for('static', filename='users/' + receiver.username + '/imageUser.jpg') }}"
+                                alt=""></div>
+                        <div class="userName">
+                            <h2>{{ receiver.name }} {{ receiver.lastname }}</h2>
+                        </div>
+                    </div>
+                    <input id="receiver_id" type="hidden" value="{{ receiver.id }}">
+                    <div class="chat" id="chat">
+                        <!-- <div class="centerDate">Ieri</div> -->
+                        {% for message in messages %}
+                        {% if current_user.id == message.id_sender %}
+                        <div class="message mine">
+                            {% else %}
+                            <div class="message">
+                                {% endif %}
+                                <div class="text">
+                                    {{ message.msg }}
+                                </div>
+                                <div class="time">
+                                    <p>{{ message.date.split(' ')[1].split('.')[0][:-3] }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="bottomChat">
+                            <input type="text" name="message" id="messageBox" placeholder="Scrivi il tuo messaggio">
+                            <button id="sendButton">Invia</button>
+                        </div>
+                    </div>
+                    <script src="{{ url_for('static', filename='js/socket.js') }}"></script>
+                </div>
+            </div>
+            <style>
+                .profile .close {
+                    display: none;
+                }
+
+                .profile .openChat {
+                    display: none;
+                }
+
+                .profile .userInfo .body {
+                    grid-template-columns: repeat(3, max-content);
+                }
+
+                @media only screen and (max-width: 1262px) {
+                    .right {
+                        display: none;
+                    }
+                }
+            </style>
+            <div id="profile" class="right" style="visibility:hidden;">
+
+                {% if profile_user %}
+                <div class="profile">
+                    <div id="close" class="close">
+                        <a href="javascript: closeProfile()"><i class="fas fa-times"></i></a>
+                    </div>
+                    <div class="userInfo">
+                        <div class="header">
+                            <div class="userImage">
+                                <img src="{{ url_for('static', filename='users/' + profile_user.username + '/imageUser.jpg') }}"
+                                    alt="userImage">
+                            </div>
+                            <h1>{{ profile_user.name }} {{ profile_user.lastname }}</h1>
+                            <p>@{{ profile_user.username }}</p>
+                        </div>
+                        <div class="body">
+                            <div class="followers">
+                                <h2 id="profileFollowers">{{ profile_followers }}</h2>
+                                <p>Seguaci</p>
+                            </div>
+                            <div class="following">
+                                <h2>{{ profile_following }}</h2>
+                                <p>Seguiti</p>
+                            </div>
+                            {% if profile_user.username == current_user.username %}
+                            <style>
+                                .profile .userInfo .body {
+                                    grid-template-columns: repeat(2, max-content);
+                                }
+
+                                .profile .userInfo .body .follow {
+                                    display: none;
+                                }
+
+                                .profile .userInfo .body .openChat {
+                                    display: none;
+                                }
+                            </style>
+                            {% endif %}
+                            <div class="follow">
+                                <!-- <button id="buttonFollow" onclick="unFollow('')" >Non seguire</button> -->
+                                <button id="buttonFollow"
+                                    onclick="javascript: toggleFollow('{{profile_user.username}}')">
+                                    {% if profile_isFollowing %}
+                                    Non seguire
+                                    {% else %}
+                                    Segui
+                                    {% endif %}
+                                </button>
+                            </div>
+                            <div class="openChat">
+                                <button id="buttonOpenChat" onclick="javascript: openChat('{{profile_user.username}}')">
+                                    <i class="fas fa-comment-dots"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feed">
+                        <h2>Feed</h2>
+                        <div class="allPosts">
+                            {% for post in feedPosts %}
+                            <div class="imagePost"><img
+                                    src="{{ url_for('static', filename='users/' + post.owner.username + '/posts/' + post.id|string + '.jpg') }}"
+                                    alt="userImage"></div>
+                            {% endfor %}
+                            <div class="endSpacer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+
+        </div>
+    </div>
+</body>
+
+</html>

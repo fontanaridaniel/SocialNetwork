@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.svg') }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/constants.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile_component.css') }}">
+
+    <!-- JS -->
+    <script src="https://kit.fontawesome.com/100b505ca0.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="left">
+            <div class="logo">
+                <div class="link">
+                    <a href="{% if current_user.isAdmin() %}
+                    {{ url_for('admin_page') }}
+                    {% else %}
+                    {{ url_for('home_page') }}
+                    {% endif %}" class="logo">
+                        <svg width="50px" height="50px" id="Layer_1" data-name="Layer 1"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 866.03 966.51">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill: #fff;
+                                    }
+                                </style>
+                            </defs>
+                            <path class="cls-1"
+                                d="M878.9,218.76,554.11,31.24a108.23,108.23,0,0,0-108.22,0L121.1,218.76A108.23,108.23,0,0,0,67,312.49v375a108.23,108.23,0,0,0,54.11,93.73L445.89,968.76a108.23,108.23,0,0,0,108.22,0L878.9,781.24A108.23,108.23,0,0,0,933,687.51v-375A108.23,108.23,0,0,0,878.9,218.76ZM775.8,628a54.12,54.12,0,0,1-27.06,46.87l-221.68,128a54.16,54.16,0,0,1-54.12,0l-24-13.86a54.12,54.12,0,0,0-60.3,4.16L299,862.9a8,8,0,0,1-12.84-7.41L301.8,743a54.12,54.12,0,0,0-26.54-54.3l-24-13.85A54.12,54.12,0,0,1,224.2,628V372a54.12,54.12,0,0,1,27.06-46.87l221.68-128a54.16,54.16,0,0,1,54.12,0l221.68,128A54.12,54.12,0,0,1,775.8,372Z"
+                                transform="translate(-66.99 -16.74)" />
+                        </svg>
+                </div>
+            </div>
+            <div class="menu">
+                <div class="link">
+                    <a href="{{ url_for('home_page') }}">
+                        <i class="fas fa-home"></i>
+                        <p>Home</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="{{ url_for('category_page') }}">
+                        <i class="fas fa-boxes"></i>
+                        <p>Categorie</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="{{ url_for('likes_page') }}">
+                        <i class="fas fa-heart"></i>
+                        <p>Mi piace</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a class="active" href="{{ url_for('chat_page_noParams') }}">
+                        <i class="fas fa-comments"></i>
+                        <p>Messaggi</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="{{ url_for('myProfile_page') }}">
+                        <i class="fas fa-user"></i>
+                        <p>Profilo</p>
+                    </a>
+                </div>
+                <div class="link logoutInMenu">
+                    <a href="{{ url_for('logout_page') }}">
+                        <i class="fas fa-power-off"></i>
+                        <p>Log out</p>
+                    </a>
+                </div>
+            </div>
+            <div class="logout">
+                <div class="link">
+                    <a href="{{ url_for('logout_page') }}">
+                        <i class="fas fa-power-off"></i>
+                        <p>Log out</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="center centerWithRightFixed">
+            <div class="chatContainer">
+                <div id="chatLeft" class="chatLeft">{% include 'components/chat_list_component.html' %}</div>
+                <div id="chatRight" class="chatRight">{% include 'components/chat_msg_component.html' %}</div>
+            </div>
+        </div>
+        <style>
+            .profile .close {
+                display: none;
+            }
+
+            .profile .openChat {
+                display: none;
+            }
+
+            .profile .userInfo .body {
+                grid-template-columns: repeat(3, max-content);
+            }
+
+            @media only screen and (max-width: 1262px) {
+                .right {
+                    display: none;
+                }
+            }
+        </style>
+        <div class="right">{% include 'components/profile_component.html' %}</div>
+    </div>
+</body>
+
+</html>

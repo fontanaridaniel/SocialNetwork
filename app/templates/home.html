@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.svg') }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/constants.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topBar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/top3.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/following.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/post.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile_component.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/postInProfile_component.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/commentInProfile_component.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notification_component.css') }}">
+
+    <!-- JS -->
+    <script src="https://kit.fontawesome.com/100b505ca0.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <!-- <div id="notifyTest"></div> -->
+    {% include 'components/notification.html' %}
+    <div class="wrapper">
+        <div class="left">
+            <div class="logo">
+                <div class="link">
+
+                    <a href="{% if current_user.isAdmin() %}
+                    {{ url_for('admin_page') }}
+                    {% else %}
+                    {{ url_for('home_page') }}
+                    {% endif %}" class="logo">
+                        <svg width="50px" height="50px" id="Layer_1" data-name="Layer 1"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 866.03 966.51">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill: #fff;
+                                    }
+                                </style>
+                            </defs>
+                            <path class="cls-1"
+                                d="M878.9,218.76,554.11,31.24a108.23,108.23,0,0,0-108.22,0L121.1,218.76A108.23,108.23,0,0,0,67,312.49v375a108.23,108.23,0,0,0,54.11,93.73L445.89,968.76a108.23,108.23,0,0,0,108.22,0L878.9,781.24A108.23,108.23,0,0,0,933,687.51v-375A108.23,108.23,0,0,0,878.9,218.76ZM775.8,628a54.12,54.12,0,0,1-27.06,46.87l-221.68,128a54.16,54.16,0,0,1-54.12,0l-24-13.86a54.12,54.12,0,0,0-60.3,4.16L299,862.9a8,8,0,0,1-12.84-7.41L301.8,743a54.12,54.12,0,0,0-26.54-54.3l-24-13.85A54.12,54.12,0,0,1,224.2,628V372a54.12,54.12,0,0,1,27.06-46.87l221.68-128a54.16,54.16,0,0,1,54.12,0l221.68,128A54.12,54.12,0,0,1,775.8,372Z"
+                                transform="translate(-66.99 -16.74)" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="menu">
+                <div class="link">
+                    <a class="active" href="{{ url_for('home_page') }}">
+                        <i class="fas fa-home"></i>
+                        <p>Home</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="{{ url_for('category_page') }}">
+                        <i class="fas fa-boxes"></i>
+                        <p>Categorie</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="{{ url_for('likes_page') }}">
+                        <i class="fas fa-heart"></i>
+                        <p>Mi piace</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="{{ url_for('chat_page_noParams') }}">
+                        <i class="fas fa-comments"></i>
+                        <p>Messaggi</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="{{ url_for('myProfile_page') }}">
+                        <i class="fas fa-user"></i>
+                        <p>Profilo</p>
+                    </a>
+                </div>
+                <div class="link logoutInMenu">
+                    <a href="{{ url_for('logout_page') }}">
+                        <i class="fas fa-power-off"></i>
+                        <p>Log out</p>
+                    </a>
+                </div>
+            </div>
+            <div class="logout">
+                <div class="link">
+                    <a href="{{ url_for('logout_page') }}">
+                        <i class="fas fa-power-off"></i>
+                        <p>Log out</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <button class="scrollToTopBtn"><i class="fas fa-chevron-up"></i></button>
+            <div class="home">
+                <section>
+                    <div class="topBar">
+                        <div class="searchBox">
+                            <input type="text" id="myInput" onkeyup="searchPeople()" placeholder="Cerca">
+                            <ul id="myUL" class="usersList"></ul>
+                        </div>
+                        <div class="addPost">
+                            <button onclick="location.href='/createPost';" class="addPostBtnLong">+ Pubblica
+                                Post</button>
+                            <button onclick="location.href='/createPost';" class="addPostBtnShort">+</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h1 class="sectionTitle">Persone che segui</h1>
+                    <div class="allFollowing">
+                        {% for user in follow_users %}
+                        <a name="{{user.username}}" class="user" href="javascript:loadProfile('{{user.username}}')">
+                            <div class="userImage"><img
+                                    src="{{ url_for('static', filename='users/' + user.username + '/imageUser.jpg') }}"
+                                    alt="userImage"></div>
+                            <div class="userName">
+                                <p>{{ user.name }} {{ user.lastname }}</p>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <section>
+                    <h1 class="sectionTitle">I più popolari</h1>
+                    <div class="top3">
+                        {% include 'components/home_top_components.html' %}
+                    </div>
+                </section>
+
+                <section>
+                    <h1 class="sectionTitle">Posts</h1>
+                    <div id="posts">
+                        {% include 'components/post_component.html' %}
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="right"></div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>var id_user = '{{ current_user.id }}'</script>
+    <script src="{{ url_for('static', filename='js/notify.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/responsive.js') }}"></script> -->
+</body>
+
+</html>

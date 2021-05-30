@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.svg') }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/constants.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <form action="{{ url_for('signup_form') }}" method="POST" class="authForm">
+        <h1>Registrati</h1>
+
+        {% if "msg" in request.args %}
+        <p class="error">{{ request.args["msg"] }}</p>
+        {% endif %}
+
+        <label for="nameInput">Nome</label>
+        <input name="nameInput" type="text" id="nameInput"
+            onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));"
+            placeholder="Nome" minlength="3" maxlength="16" required>
+
+        <label for="lastnameInput">Cognome</label>
+        <input name="lastnameInput" type="text" id="lastnameInput"
+            onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));"
+            placeholder="Cognome" minlength="3" maxlength="16" required>
+
+        <label for="usernameInput">Username</label>
+        <input autocomplete="off" onpaste="return false;" ondrop="return false;" name="usernameInput" type="text"
+            id="usernameInput"
+            onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 46 || event.charCode == 95 || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));"
+            placeholder="Username" minlength="3" maxlength="24" required>
+
+        <label for="emailInput">E-Mail</label>
+        <input name="emailInput" type="email" id="emailInput"
+            onkeypress="return ((event.charCode > 63 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 46 || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));"
+            placeholder="E-Mail" required>
+
+        <label for="passwordInput">Password</label>
+        <input name="passwordInput" type="password" id="passwordInput" placeholder="Password" minlength="6" required>
+
+        <label for="confirmPasswordInput">Conferma Password</label>
+        <input name="confirmPasswordInput" type="password" id="confirmPasswordInput" placeholder="Conferma Password"
+            minlength="6" required>
+
+        <button type="submit">Registrati</button>
+
+        <a href="{{ url_for('login_page') }}">Hai già un profilo? Accedi.</a>
+    </form>
+    <script>
+        //document.getElementById("usernameInput").addEventListener('paste', e => e.preventDefault());
+    </script>
+</body>
+
+</html>

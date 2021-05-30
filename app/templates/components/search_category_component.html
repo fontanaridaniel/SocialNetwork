@@ -1,0 +1,8 @@
+{% for post in posts %}
+    {{post.username}}
+    <div class="post">
+        <a href="javascript:loadPostProfile('{{ post.id }}', true)">
+            <img src="{{ url_for('static', filename='users/' + post.owner.username + '/posts/' + post.id|string + '.jpg') }}" alt="postImage">
+        </a>
+    </div>
+{% endfor %}

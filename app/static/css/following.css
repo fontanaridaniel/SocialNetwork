@@ -1,0 +1,75 @@
+/* .allFollowing {
+    display: grid;
+    grid-auto-columns: max-content;
+    grid-template-rows: max-content;
+    overflow-x: auto;
+    grid-gap: 8px;
+    padding: 8px;
+}
+
+.allFollowing .user {
+    grid-row: 1/2;
+    display: grid;
+    grid-template-columns: max-content;
+    grid-template-rows: repeat(2, max-content);
+    justify-items: center;
+    text-decoration: none;
+    color: var(--friendTextColor);
+    z-index: 1;
+} */
+
+.allFollowing {
+    overflow-x: auto;
+    display: flex;
+    padding: 8px 0;
+}
+
+.allFollowing .user {
+    display: grid;
+    grid-template-columns: max-content;
+    grid-template-rows: repeat(2, max-content);
+    justify-items: center;
+    text-decoration: none;
+    color: var(--friendTextColor);
+    z-index: 1;
+}
+
+.allFollowing .user:not(:last-child) {
+    margin-right: 8px;
+}
+
+
+.allFollowing a {
+    color: var(--friendTextColor);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.allFollowing .user .userImage {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.allFollowing .user .userImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.allFollowing .user .userName {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.allFollowing .user .userName p {
+    white-space: nowrap;
+    text-align: center;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 16px;
+}

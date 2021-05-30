@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+
+    <script src="https://kit.fontawesome.com/100b505ca0.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+</head>
+
+<body onload="fastLoad()">
+    {% if db_posts %}
+    <!-------------------POSTS---------------------------->
+    <input id="fastLoad" type="hidden" value="posts">
+    {% elif db_chats %}
+    <!-------------------CHATS---------------------------->
+    <input id="fastLoad" type="hidden" value="chats">
+    {% elif db_messages %}
+    <!-------------------MESSAGES------------------------->
+    <input id="fastLoad" type="hidden" value="messages">
+    {% elif db_likes %}
+    <!-------------------LIKES---------------------------->
+    <input id="fastLoad" type="hidden" value="likes">
+    {% elif db_followers %}
+    <!-------------------FOLLOWERS------------------------>
+    <input id="fastLoad" type="hidden" value="followers">
+    {% else %}
+    <!-------------------USERS---------------------------->
+    <input id="fastLoad" type="hidden" value="users">
+    {% endif %}
+    <div style="height:100%;">
+        <div class="outer-div">
+            <div class="database-list">
+                <button onclick="location.href='/';">HOME</button>
+                <div id="divusers" class="database-name">
+                    <a href="javascript:loadDB('users')">Users</a>
+                </div>
+                <div id="divposts" class="database-name">
+                    <a href="javascript:loadDB('posts')">Posts</a>
+                </div>
+                <div id="divchats" class="database-name">
+                    <a href="javascript:loadDB('chats')">Chats</a>
+                </div>
+            </div>
+            <div id="result"></div>
+        </div>
+    </div>
+</body>
+
+</html>

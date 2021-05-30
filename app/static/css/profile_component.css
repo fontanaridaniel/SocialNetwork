@@ -1,0 +1,210 @@
+.profile {
+    color: var(--profileTextColor);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, max-content) minmax(0, 1fr);
+    grid-gap: 16px;
+    height: 100%;
+}
+
+.profile .close {
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+.profile .close i {
+    color: var(--profileTextColor);
+    font-size: 24px;
+}
+
+.profile .userInfo {
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+.profile .userInfo {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, max-content);
+    justify-items: center;
+    grid-gap: 16px;
+}
+
+.profile .userInfo .header {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, max-content);
+    justify-items: center;
+    grid-gap: 8px;
+}
+
+.profile .userInfo .header .userImage {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile .userInfo .header .userImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile .userInfo .header h1 {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    white-space: nowrap;
+    text-align: center;
+    width: 100%;
+    max-width: 424px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 40px;
+}
+
+.profile .userInfo .header p {
+    grid-column: 1/2;
+    grid-row: 3/4;
+}
+
+.profile .userInfo .body {
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    grid-template-rows: max-content;
+    grid-gap: 24px;
+}
+
+.profile .userInfo .body .followers {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    text-align: center;
+}
+
+.profile .userInfo .body .following {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    text-align: center;
+}
+
+.profile .userInfo .body .follow {
+    grid-column: 3/4;
+    grid-row: 1/2;
+}
+
+.profile .userInfo .body .openChat {
+    grid-column: 4/5;
+    grid-row: 1/2;
+}
+
+.profile .userInfo .body .openChat button {
+    background: var(--allPostsBackgroundColor);
+    width: 40px;
+    padding: 0
+}
+
+.profile .userInfo .body .openChat button i {
+    color: var(--mainColorNotGradient);
+    margin: 0 auto;
+}
+
+.profile .feed {
+    grid-column: 1/2;
+    grid-row: 3/4;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content minmax(0, 1fr);
+    grid-gap: 8px;
+    justify-self: center;
+    width: 100%;
+}
+
+.profile .feed .allPosts {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-auto-rows: max-content;
+    grid-gap: 16px;
+    background: var(--allPostsBackgroundColor);
+    padding: 16px;
+    border-radius: var(--borderRadius);
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.profile .feed .allPosts::-webkit-scrollbar-track-piece:start {
+    margin-top: 24px;
+}
+
+.profile .feed .allPosts::-webkit-scrollbar-track-piece:end {
+    margin-bottom: 24px;
+}
+
+.profile .feed .allPosts .imagePost {
+    border-radius: var(--borderRadius);
+    overflow: hidden;
+    width: 120px;
+    height: 120px;
+    transition: opacity var(--transitionTime), filter var(--transitionTime);
+}
+
+.profile .feed .allPosts .imagePost:hover {
+    opacity: 0.8;
+    filter: brightness(1.2);
+}
+
+.profile .feed .allPosts .imagePost img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile .feed .allPosts .endSpacer {
+    grid-column: 1/4;
+    height: 1px;
+}
+
+@media only screen and (max-width: 650px) {
+    .profile .userInfo .header .userImage {
+        width: 104px;
+        height: 104px;
+    }
+
+    .profile .feed .allPosts {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 8px;
+    }
+
+    .profile .feed .allPosts .imagePost {
+        width: 100%;
+        height: 100%;
+    }
+
+    .profile .feed .allPosts .endSpacer {
+        grid-column: 1/4;
+        height: 1px;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .profile .userInfo .body {
+        grid-gap: 8px;
+    }
+
+    .profile .feed .allPosts {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 8px;
+    }
+
+    .profile .feed .allPosts .imagePost {
+        width: 100%;
+        height: 100%;
+    }
+
+    .profile .feed .allPosts .endSpacer {
+        grid-column: 1/3;
+        height: 1px;
+    }
+}

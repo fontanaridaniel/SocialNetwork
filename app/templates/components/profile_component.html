@@ -1,0 +1,68 @@
+{% if profile_user %}
+<div class="profile">
+    <div id="close" class="close">
+        <a href="javascript: closeProfile()"><i class="fas fa-times"></i></a>
+    </div>
+    <div class="userInfo">
+        <div class="header">
+            <div class="userImage">
+                <img src="{{ url_for('static', filename='users/' + profile_user.username + '/imageUser.jpg') }}"
+                    alt="userImage">
+            </div>
+            <h1>{{ profile_user.name }} {{ profile_user.lastname }}</h1>
+            <p>@{{ profile_user.username }}</p>
+        </div>
+        <div class="body">
+            <div class="followers">
+                <h2 id="profileFollowers">{{ profile_followers }}</h2>
+                <p>Seguaci</p>
+            </div>
+            <div class="following">
+                <h2>{{ profile_following }}</h2>
+                <p>Seguiti</p>
+            </div>
+            {% if profile_user.username == current_user.username %}
+            <style>
+                .profile .userInfo .body {
+                    grid-template-columns: repeat(2, max-content);
+                }
+
+                .profile .userInfo .body .follow {
+                    display: none;
+                }
+
+                .profile .userInfo .body .openChat {
+                    display: none;
+                }
+            </style>
+            {% endif %}
+            <div class="follow">
+                <!-- <button id="buttonFollow" onclick="unFollow('')" >Non seguire</button> -->
+                <button id="buttonFollow" onclick="javascript: toggleFollow('{{profile_user.username}}')">
+                    {% if profile_isFollowing %}
+                    Non seguire
+                    {% else %}
+                    Segui
+                    {% endif %}
+                </button>
+            </div>
+            <div class="openChat">
+                <button id="buttonOpenChat" onclick="javascript: openChat('{{profile_user.username}}')">
+                    <i class="fas fa-comment-dots"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="feed">
+        <h2>Feed</h2>
+        <div class="allPosts">
+            {% for post in feedPosts %}
+            <a href="javascript:loadPostProfile('{{ post.id }}')"><div class="imagePost"><img
+                    src="{{ url_for('static', filename='users/' + post.owner.username + '/posts/' + post.id|string + '.jpg') }}"
+                    alt="userImage"></div></a>
+            {% endfor %}
+            <div class="endSpacer"></div>
+        </div>
+    </div>
+</div>
+{% endif %}

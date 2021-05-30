@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Set Profile Image</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.svg') }}">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/constants.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/setProfileImage.css') }}">
+
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <form method="POST" action="{{ url_for('setProfileImage') }}" enctype="multipart/form-data" class="form">
+    <h1>Imposta immagine profilo</h1>
+    <p>Premi sull'immagine per selezionare un file</p>
+    <label for="profileImageFile">
+      <div class="userImage">
+        <img id="myImg"
+          src="https://eu.ui-avatars.com/api/?name={{current_user.name}}+{{current_user.lastname}}&format=svg&bold=true"
+          alt="">
+      </div>
+    </label>
+    <input id="profileImageFile" type="file" name="profileImageFile" accept="image/*">
+    <div class="actions"><a href="javascript:resetImage();" id="resetImage">Reset immagine</a><button
+        type="submit">Salva</button>
+    </div>
+
+  </form>
+</body>
+
+<script>
+  function resetImage() {
+    document.getElementById("myImg").src =
+      "https://eu.ui-avatars.com/api/?name={{current_user.name}}+{{current_user.lastname}}&format=svg&bold=true";
+    document.getElementById("profileImageFile").value = null;
+  }
+
+  $(function () {
+    $(":file").change(function () {
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = imageIsLoaded;
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+  });
+
+  function imageIsLoaded(e) {
+    $('#myImg').attr('src', e.target.result);
+  };
+</script>
+
+</html>

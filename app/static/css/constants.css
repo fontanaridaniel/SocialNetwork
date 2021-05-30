@@ -1,0 +1,128 @@
+:root {
+    /* Global */
+
+    /* LIGHT THEME */
+    /* --mainColor: #0b0913;
+    --mainColorNotGradient: #0b0913;
+    --secondaryColor: #ffffff;
+    --backgroundColorNotGradient: #ffffff;
+    --accentColor: #5039ab;
+
+    --mainTextColor: #0b0913;
+    --secondaryTextColor: #ffffff;
+    --leftMenuTextColor: #524f64;
+
+    --defaultRed: #ec3b3b;
+    --inputBarBackgroundColor: #e2e2e2;
+    --placeHolderTextColor: #606d81; */
+
+
+    /* GRADIENT THEME */
+    --mainColor: linear-gradient(180deg, #0c0e1b 0%, #080b14 100%);
+    --mainColorNotGradient: #0c0e1b;
+    --secondaryColor: #ffffff;
+    --backgroundColor: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+    --backgroundColorNotGradient: #ffffff;
+    --accentColor: linear-gradient(180deg, #0575E6 0%, #054ce6 100%);
+
+    --mainTextColor: #0c0e1b;
+    --secondaryTextColor: #ffffff;
+    --leftMenuTextColor: #515769;
+
+    --defaultRed: #fe3946;
+    --defaultRedBtn: linear-gradient(180deg, #fe3946 0%, #fe2639 100%);
+    --defaultGreen: #8BC34A;
+    --defaultGreenBtn: linear-gradient(180deg, #8BC34A 0%, #4CAF50 100%);
+    --inputBarBackgroundColor: #e2e2e2;
+    --inputBarBorderColor: #0575E6;
+    --placeHolderTextColor: #606d81;
+
+    /* DARK THEME */
+    /* --mainColor: #06090F;
+    --mainColorNotGradient: #06090F;
+    --backgroundColor: #0D1117;
+    --backgroundColorNotGradient: #0D1117;
+    --secondaryColor: #161B22;
+    --accentColor: #344155;
+
+    --mainTextColor: #ffffff;
+    --secondaryTextColor: #ffffff;
+    --leftMenuTextColor: #344155;
+
+    --defaultRed: #ec3b3b;
+    --inputBarBackgroundColor: #06090F;
+    --placeHolderTextColor: #606d81; */
+
+    /* ------------------------------------------------------------------ */
+    --defaultFont: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    --inputBarFocusedBorderColor: var(--mainColor);
+    --inputBarTextColor: var(--mainTextColor);
+    --inputBarPlaceholderColor: var(--placeHolderTextColor);
+
+    --defaultBtnBackgroundColor: var(--accentColor);
+    --defaultBtnTextColor: var(--secondaryTextColor);
+
+    --defaultBoxShadow: 0px 0px 8px 0px #080b1425;
+
+    --borderRadius: 24px;
+    --transitionTime: 0.3s;
+
+    /* Layout */
+    --wrapperBackgroundColor: linear-gradient(90deg, var(--mainColorNotGradient) 30%, var(--backgroundColorNotGradient) 30%);
+    --leftBackgroundColor: var(--mainColor);
+    --leftTextColor: var(--secondaryTextColor);
+    --leftDisabledTextColor: var(--leftMenuTextColor);
+    --centerBackgroundColor: var(--backgroundColor);
+    --rightBackgroundColor: var(--mainColor);
+
+    /* Home */
+    --homeTextColor: var(--mainTextColor);
+
+    /* Top Bar */
+    --searchedUserText: var(--mainTextColor);
+    --addPostBtnText: var(--secondaryTextColor);
+
+    /* Friends */
+    --friendTextColor: var(--mainTextColor);
+
+    /* Top 3 */
+    --cardBackgroundColor: var(--secondaryColor);
+    --cardTextColor: var(--mainTextColor);
+
+    /* Post */
+    --postTextColor: var(--mainTextColor);
+    --postBackgroundColor: var(--secondaryColor);
+    --tagTextColor: var(--secondaryTextColor);
+    --tagBackgroundColor: var(--mainColor);
+
+    /* Profile */
+    --profileTextColor: var(--secondaryTextColor);
+    --allPostsBackgroundColor: var(--backgroundColor);
+
+    /* Chat */
+    --chatLeftTextColor: var(--mainTextColor);
+    --chatListUserBackgroundColor: var(--backgroundColor);
+    --chatListUserCardBackgroundColor: var(--secondaryColor);
+    --chatListuserTextColor: var(--mainTextColor);
+    --messageBackgroundColor: var(--secondaryColor);
+    --messageTextColor: var(--mainTextColor);
+    --myMessageBackgroundColor: var(--mainColor);
+    --myMessageTextColor: var(--secondaryTextColor);
+    --centerDateBackgroundColor: var(--mainColor);
+    --centerDateTextColor: var(--secondaryTextColor);
+    --chatNavbarBackgroundColor: var(--mainColor);
+    --chatNavbarTextColor: var(--secondaryTextColor);
+
+    /* Auth */
+    --authFormBackgroundColor: var(--backgroundColor);
+    --authFormTextColor: var(--mainTextColor);
+
+    /* Set Profile Image */
+    --setImageFormTextColor: var(--mainTextColor);
+    --setImageFormBackgroundColor: var(--backgroundColor);
+
+    /* Create Post */
+    --postFormBackgroundColor: var(--backgroundColor);
+    --postFormTextColor: var(--mainTextColor);
+}

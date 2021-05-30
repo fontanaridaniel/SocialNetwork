@@ -1,0 +1,17 @@
+{% for i in range(5) %}
+{% if search_users|length > i %}
+<li onmousedown="loadProfile('{{search_users[i].username}}')"><a>
+        <div class="user">
+            <div class="userImage"><img
+                    src="{{ url_for('static', filename='users/' + search_users[i].username + '/imageUser.jpg') }}"
+                    alt="userImage">
+            </div>
+            {% if uname %}
+            <p>{{ search_users[i].username }}</p>
+            {% else %}
+            <p>{{ search_users[i].name }} {{ search_users[i].lastname }}</p>
+            {% endif %}
+        </div>
+    </a></li>
+{% endif %}
+{% endfor %}

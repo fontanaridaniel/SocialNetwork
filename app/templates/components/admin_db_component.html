@@ -1,0 +1,138 @@
+<script>
+    var idForImg;
+</script>
+{% if db_posts %}
+<!-------------------POSTS---------------------------->
+<table>
+    <tr>
+        <th>Owner</th>
+        <th>Post Image</th>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Hashtags</th>
+    </tr>
+        {% for post in posts %}
+        <tr id="row{{ post.id }}">
+            <td id="owner_img"> <img src="{{ url_for('static', filename='users/' + post.owner.username + '/imageUser.jpg') }}"> <p>{{ post.owner.username }}</p> </td>
+            <td id="post_img">
+                <label id="label{{ post.id }}">
+                    <div class="postImage">
+                        <img class="myImg" id="myImg{{ post.id }}" src="{{ url_for('static', filename='users/' + post.owner.username + '/posts/' + post.id|string + '.jpg')}}"
+                            alt="">
+                    </div>
+                </label>
+                <input name="postImageFile" id="profileImageFile" type="file" accept="image/*">
+            </td>
+            <td><p>{{ post.id }}</p></td>
+            <td id="post_title"><p>{{ post.title }}</p></td>
+            <td id="post_hashtags"><p>{{ post.hashtags }}</p></td>
+            <td>
+                <button id="edit{{ post.id }}" style="visibility:visible;" onclick="idForImg = '{{ post.id }}';modify_posts('{{ post.id }}','{{ post.owner.id }}')"><i class="fas fa-edit"></i></button>
+                <button id="save{{ post.id }}" style="visibility:hidden;" onclick="modify_posts('{{ post.id }}','{{ post.owner.id }}')"><i class="far fa-save"></i></button>
+                <button id="undo{{ post.id }}" style="visibility:hidden;" onclick="delete_post('{{ post.id }}','{{ post.owner.id }}')"><i class="far fa-trash-alt"></i></i></button>
+            </td>
+        </tr>
+        {% endfor %}
+</table>
+<form id="form" method="POST" action="{{ url_for('modifyPost_form') }}" enctype="multipart/form-data" autocomplete="off">
+    <input type="text" id="title"         name="title"         style="display: none;">
+    <input type="text" id="description"   name="description"   style="display: none;">
+    <input type="text" id="hashtag"       name="hashtag"       style="display: none;">
+    <input type="text" id="id_post"       name="id_post"       style="display: none;">
+    <input type="text" id="id_user"       name="id_user"       style="display: none;">
+    <input type="submit" id="submitBtn" style="visibility:hidden;">
+</form>
+<script>
+    $(function () {
+        $(":file").change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = imageIsLoaded;
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+
+    function imageIsLoaded(e) {
+        $('#myImg').attr('src', e.target.result);
+    };
+</script>
+{% elif db_chats %}
+<!-------------------CHATS---------------------------->
+<table>
+    <tr>
+        <th>Id</th>
+        <th>User1</th>
+        <th>User2</th>
+    </tr>
+    {% for chat in chats %}
+    <tr id="row{{ chat[0].id }}">
+        <td><p>{{ chat[0].id }}</p></td>
+        <td id="owner_img"> <img src="{{ url_for('static', filename='users/' + chat[1].username + '/imageUser.jpg') }}"> <p>{{ chat[1].username }}</p> </td>
+        <td id="owner_img"> <img src="{{ url_for('static', filename='users/' + chat[2].username + '/imageUser.jpg') }}"> <p>{{ chat[2].username }}</p> </td>
+        <td>
+            <button title="Undo" id="edit{{ chat[0].id }}" style="visibility:visible;" onclick="modify_chat('{{ chat[0].id }}')"><i class="fas fa-edit"></i></button>
+            <button title="Delete Chat" id="del{{ chat[0].id }}" style="visibility:hidden;" onclick="delete_chat('{{ chat[0].id }}')"><i class="far fa-trash-alt"></i></i></button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<!-------------------USERS---------------------------->
+<table>
+    <tr>
+        <th>Image</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Lastname</th>
+        <th>Username</th>
+        <th>Email</th>
+    </tr>
+        {% for user in users %}
+        <tr id="row{{ user.id }}">
+            <td id="post_img">
+                <label id="label{{ user.id }}">
+                    <div class="postImage">
+                        <img class="myImg" id="myImg{{ user.id }}" src="{{ url_for('static', filename='users/' + user.username + '/imageUser.jpg')}}"
+                            alt="">
+                    </div>
+                </label>
+                <input name="postImageFile" id="profileImageFile" type="file" accept="image/*">
+            </td>
+            <td><p>{{ user.id }}</p></td>
+            <td id="user_name"><p>{{ user.name }}</p></td>
+            <td id="user_lastname"><p>{{ user.lastname }}</p></td>
+            <td id="user_username"><p>{{ user.username }}</p></td>
+            <td id="user_email"><p>{{ user.email }}</p></td>
+            <td>
+                <button id="edit{{ user.id }}" style="visibility:visible;" onclick="idForImg = '{{ user.id }}'; modify_users('{{ user.id }}')"><i class="fas fa-edit"></i></button>
+                <button id="save{{ user.id }}" style="visibility:hidden;" onclick="modify_users('{{ user.id }}')"><i class="far fa-save"></i></button>
+                <button id="undo{{ user.id }}" style="visibility:hidden;" onclick="delete_user('{{ user.id }}')"><i class="far fa-trash-alt"></i></i></button>
+            </td>
+        </tr>
+        {% endfor %}
+</table>
+<form id="form" method="POST" action="{{ url_for('modifyUser_form') }}" enctype="multipart/form-data" autocomplete="off">
+    <input type="text" id="name"     name="name"         style="display: none;">
+    <input type="text" id="lastname" name="lastname"   style="display: none;">
+    <input type="text" id="username" name="username"       style="display: none;">
+    <input type="text" id="email"    name="email"       style="display: none;">
+    <input type="text" id="id_user"  name="id_user"       style="display: none;">
+    <input type="submit" id="submitBtn" style="display: none;">
+</form>
+{% endif %}
+<script>
+    $(function () {
+        $(":file").change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = imageIsLoaded;
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+
+    function imageIsLoaded(e) {
+        $('#myImg'+idForImg).attr('src', e.target.result);
+    };
+</script>

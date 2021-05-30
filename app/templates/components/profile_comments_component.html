@@ -1,0 +1,48 @@
+<div class="comments">
+    <div id="close" class="close">
+        <a href="javascript: closeProfile()"><i class="fas fa-times"></i></a>
+    </div>
+    <div class="back">
+        <a href="javascript:loadPostProfile('{{ post.id }}')"><i class="fas fa-arrow-left"></i></a>
+    </div>
+    <div class="content">
+        <div class="postHeader">
+            <a class="userImage" href="javascript: loadProfile('{{ post.owner.username }}')">
+                <img src="/app/users/{{ post.owner.username }}/imageUser.jpg" alt="userImage">
+            </a>
+            <div class="userName">
+                <a href="javascript: loadProfile('{{ post.owner.username }}')">{{ post.owner.username }}</a>
+            </div>
+            <p class="postDate">{{ post.getPostDate() }}</p>
+        </div>
+        <div class="postBottom">
+            <div class="postImage"><img src="/app/users/{{ post.owner.username }}/posts/{{ post.id }}.jpg"
+                    alt="postImage"></div>
+            <div class="postTitle">{{ post.title }}</div>
+        </div>
+        <div class="commentsHeader">
+            <h2>Commenti</h2>
+            <button class="addCommentBtn long" onclick="openAddCommentInput()">+ Aggiungi commento</button>
+            <button class="addCommentBtn short" onclick="openAddCommentInput()">+ Commento</button>
+
+            <div class="insertComment">
+                <input type="text" class="commentTextInput" maxlength="260" placeholder="Testo del commento">
+                <button class="sendComment" onclick="sendComment('{{ post.id }}')"><i
+                        class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="commentsList">
+            {% for comment in comments %}
+            <div class="comment">
+                <div class="userImage"><a href="javascript: loadProfile('{{ comment.owner.username }}')"><img
+                            src="/app/users/{{ comment.owner.username }}/imageUser.jpg" alt="userImage"></a>
+                </div>
+                <div class="userName"><a
+                        href="javascript: loadProfile('{{ comment.owner.username }}')">{{ comment.owner.username }}</a>
+                </div>
+                <div class="text">{{ comment.text }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

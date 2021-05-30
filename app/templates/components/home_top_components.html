@@ -1,0 +1,28 @@
+
+{% for user in top_users %}
+<a class="card" href="javascript:loadProfile('{{user[1].username}}')">
+    <div class="posts">
+        <div class="post1">
+            {% if user[2][0] %}
+            <img src="{{ url_for('static', filename='users/' + user[1].username + '/posts/' + user[2][0].id|string + '.jpg') }}"
+                alt="postImage">
+            {% endif %}
+        </div>
+        <div class="post2">
+            {% if user[2][1] %}
+            <img src="{{ url_for('static', filename='users/' + user[1].username + '/posts/' + user[2][1].id|string + '.jpg') }}"
+                alt="postImage">
+            {% endif %}
+        </div>
+    </div>
+    <div class="userImage"><img
+            src="{{ url_for('static', filename='users/' + user[1].username + '/imageUser.jpg') }}"
+            alt="userImage"></div>
+    <div class="userName">
+        <p>{{ user[1].name }} {{ user[1].lastname }}</p>
+    </div>
+    <div class="followers">
+        <p>{{ user[0] }} Seguaci</p>
+    </div>
+</a>
+{% endfor %}

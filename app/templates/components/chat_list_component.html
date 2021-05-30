@@ -1,0 +1,19 @@
+<h1>Chat</h1>
+<input type="hidden" id="id_chat">
+<input type="hidden" id="id_user">
+<ul id="chatList">
+    {% for chat in chatList %}
+    <a id="idLoadChat" onclick="try{disconnect_chat();}catch{} loadChat('{{ chat[0] }}','{{ chat[1].username }}','{{ current_user.id }}');">
+        <li>
+            <div class="userImage"><img src="{{ url_for('static', filename='users/' + chat[1].username + '/imageUser.jpg') }}" alt="userImage"></div>
+            <div class="userName">
+                <p>{{ chat[1].name }} {{ chat[1].lastname }}</p>
+            </div>
+            <div class="time">
+                <p>{{ chat[2] }}</p>
+            </div>
+            <div class="openChat"><i class="fas fa-arrow-right"></i></div>
+        </li>
+    </a>
+    {% endfor %}
+</ul>

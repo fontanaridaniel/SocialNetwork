@@ -1,0 +1,169 @@
+.right .post {
+    height: 100%;
+    grid-gap: 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content 1fr;
+    overflow: hidden;
+    width: 424px;
+}
+
+.right .post .back a {
+    color: var(--profileTextColor);
+    font-size: 24px;
+}
+
+.right .post .close a {
+    color: var(--profileTextColor);
+    font-size: 24px;
+}
+
+.right .post .content {
+    background-color: #fff;
+    color: var(--postTextColor);
+    background: var(--postBackgroundColor);
+    height: max-content;
+    -webkit-box-shadow: var(--defaultBoxShadow);
+    -moz-box-shadow: var(--defaultBoxShadow);
+    box-shadow: var(--defaultBoxShadow);
+    border-radius: var(--borderRadius);
+    padding: 16px;
+    grid-gap: 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, max-content);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.right .post .postImage {
+    border-radius: var(--borderRadius);
+    overflow: hidden;
+    transition: 0.1s;
+    grid-column: 1/2;
+    grid-row: 2/3;
+    max-width: 400px;
+    height: auto;
+    justify-self: center;
+}
+
+.right .post .postImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.right .post .postHeader {
+    grid-template-rows: 1fr;
+    grid-gap: 8px;
+    align-items: center;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+}
+
+.right .post .postHeader .userImage {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.right .post .postHeader .userImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.right .post .postHeader .userName {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.right .post .postHeader .userName a {
+    color: var(--postTextColor);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.right .post .postHeader .postDate {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    align-self: baseline;
+    background: var(--tagBackgroundColor);
+    color: var(--tagTextColor);
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 9999px;
+}
+
+.right .post .postBody {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, max-content) 1fr;
+    grid-gap: 8px;
+    grid-column: 1/2;
+    grid-row: 3/4;
+}
+
+.right .post .postBody .actionsBtn {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    grid-template-rows: 1fr;
+    grid-gap: 8px;
+}
+
+.right .post .postBody .actionsBtn a {
+    color: var(--postTextColor);
+}
+
+.right .post .postBody .actionsBtn .vl {
+    height: 100%;
+    border-left: 1px solid var(--postTextColor);
+}
+
+.right .post .postBody .hashtags {
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+.right .post .postBody .hashtags p {
+    background: var(--tagBackgroundColor);
+    color: var(--tagTextColor);
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 9999px;
+    display: inline-block;
+}
+
+.right .post .postBody .postTitle {
+    grid-column: 1/2;
+    grid-row: 3/4;
+    word-break: break-all;
+}
+
+.right .post .postBody .showComments {
+    grid-column: 1/2;
+    grid-row: 4/5;
+    justify-self: center;
+}
+
+.right .post .postBody .showComments a {
+    background: var(--tagBackgroundColor);
+    color: var(--tagTextColor);
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 9999px;
+}
+
+@media only screen and (max-width: 650px) {
+    .right .post {
+        width: 100%;
+    }
+}

@@ -1,0 +1,179 @@
+.center .userProfile {
+    padding: 24px;
+}
+
+.center .userProfile .userInfo {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    grid-template-rows: repeat(3, max-content) 1fr;
+    column-gap: 16px;
+}
+
+.center .userProfile .userInfo .userImage {
+    grid-column: 1/2;
+    grid-row: 1/5;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.center .userProfile .userInfo .userImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.center .userProfile .userInfo .name {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.center .userProfile .userInfo .name h1 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 40px;
+}
+
+.center .userProfile .userInfo .username {
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.center .userProfile .userInfo .username p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 24px;
+}
+
+.center .userProfile .userInfo .follow {
+    grid-column: 2/3;
+    grid-row: 3/4;
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: max-content;
+    grid-gap: 16px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.center .userProfile .userInfo .editProfile {
+    grid-column: 2/3;
+    grid-row: 4/5;
+}
+
+.center .userProfile .userInfo .editProfile button {
+    height: auto;
+    padding: 4px 8px;
+}
+
+.center .userProfile .feedHeader {
+    margin: 16px 0;
+}
+
+.center .userProfile .feed {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-auto-rows: max-content;
+    grid-gap: 16px;
+}
+
+.center .userProfile .feed .post {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--borderRadius);
+    overflow: hidden;
+}
+
+.center .userProfile .feed .post img {
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 1650px) {
+    .center .userProfile .feed {
+        grid-template-columns: repeat(7, 1fr);
+    }
+}
+
+@media only screen and (max-width: 1450px) {
+    .center .userProfile .feed {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .center .userProfile .feed {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media only screen and (max-width: 1050px) {
+    .center .userProfile .feed {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .center .userProfile .feed {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .center .userProfile {
+        padding: 16px;
+    }
+
+    .center .userProfile .userInfo {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, max-content);
+        justify-items: center;
+    }
+
+    .center .userProfile .userInfo .userImage {
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+
+    .center .userProfile .userInfo .name {
+        grid-column: 1/2;
+        grid-row: 2/3;
+    }
+
+    .center .userProfile .userInfo .name h1 {
+        font-size: 24px;
+        line-height: 32px;
+        text-align: center;
+        width: calc(100vw - 24px);
+    }
+
+
+    .center .userProfile .userInfo .username {
+        grid-column: 1/2;
+        grid-row: 3/4;
+    }
+
+    .center .userProfile .userInfo .username p {
+        text-align: center;
+        width: calc(100vw - 24px);
+    }
+
+    .center .userProfile .userInfo .follow {
+        grid-column: 1/2;
+        grid-row: 4/5;
+    }
+
+    .center .userProfile .userInfo .editProfile {
+        grid-column: 1/2;
+        grid-row: 5/6;
+    }
+
+
+    .center .userProfile .feed {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

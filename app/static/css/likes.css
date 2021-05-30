@@ -1,0 +1,63 @@
+.center .likesHeader {
+    padding-bottom: 16px;
+}
+
+.center .allLikes {
+    padding: 24px;
+}
+
+.center .allPosts {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-auto-rows: max-content;
+    grid-gap: 16px;
+}
+
+.center .allPosts .post {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--borderRadius);
+    overflow: hidden;
+}
+
+.center .allPosts .post img {
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 1650px) {
+    .center .allPosts {
+        grid-template-columns: repeat(7, 1fr);
+    }
+}
+
+@media only screen and (max-width: 1450px) {
+    .center .allPosts {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .center .allPosts {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media only screen and (max-width: 1050px) {
+    .center .allPosts {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .center .allPosts {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .center .allPosts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

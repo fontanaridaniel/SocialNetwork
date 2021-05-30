@@ -1,0 +1,41 @@
+{% if receiver %}
+<div class="chatNavbar">
+    <div class="back"><a href="javascript:returnOnChatListMobile();"><i class="fas fa-arrow-left"></i></a></div>
+    <div class="userImage"><img src="{{ url_for('static', filename='users/' + receiver.username + '/imageUser.jpg') }}"
+            alt=""></div>
+    <div class="userName">
+        <h2>{{ receiver.name }} {{ receiver.lastname }}</h2>
+    </div>
+</div>
+<div class="chat" id="chat">
+    <!-- <div class="centerDate">Ieri</div> -->
+    {% for message in messages %}
+        {% if current_user.id == message.id_sender %}
+        <div class="message mine">
+        {% else %}
+        <div class="message">
+        {% endif %}
+                <div class="text">
+                    {{ message.msg }}
+                </div>
+                <div class="time">
+                    <p>{{ message.date.split(' ')[1].split('.')[0][:-3] }}</p>
+                </div>
+            </div>
+    {% endfor %}
+    </div>
+    <div class="bottomChat">
+        <input type="text" name="message" id="messageBox" placeholder="Scrivi il tuo messaggio">
+        <button id="sendButton">Invia</button>
+    </div>
+    <script> 
+    var id_user = '{{ current_user.id }}'
+    var id_chat = '{{ chat.id }}';
+    var id_receiver = '{{ receiver.id }}';
+    </script>
+    <script src="{{ url_for('static', filename='js/socket.js') }}"></script>
+{% endif %}
+<script>
+    try {$("#chat").scrollTop($("#chat")[0].scrollHeight);}
+    catch {}
+</script>

@@ -1,0 +1,48 @@
+<div class="post">
+    <div id="close" class="close">
+        <a href="javascript: closeProfile()"><i class="fas fa-times"></i></a>
+    </div>
+    <div class="back">
+        <a href="javascript: loadProfile('{{post.owner.username}}')"><i class="fas fa-arrow-left"></i></a>
+    </div>
+    <div class="content">
+        <div class="postHeader">
+            <a class="userImage" href="">
+                <img src="/app/users/{{ post.owner.username }}/imageUser.jpg" alt="userImage">
+            </a>
+            <div class="userName">
+                <a href="javascript: loadProfile('{{ post.owner.username }}')">{{ post.owner.name }}
+                    {{ post.owner.lastname }}</a>
+            </div>
+            <p class="postDate">{{ post.getPostDate() }}</p>
+        </div>
+        <div class="postImage">
+            <img src="/app/users/{{ post.owner.username }}/posts/{{ post.id }}.jpg" alt="postImage">
+        </div>
+
+        <div class="postBody">
+            <div class="actionsBtn">
+                {% if liked %}
+                <a href="javascript: toggleLike('{{post.id}}')"><i name="{{post.id}}" class="fas fa-heart"></i> Mi
+                    piace <span name="{{post.id}}">{{
+                    likes }}</span></a>
+                {% else %}
+                <a href="javascript: toggleLike('{{post.id}}')"><i name="{{post.id}}" class="far fa-heart"></i> Mi
+                    piace <span name="{{post.id}}">{{
+                    likes }}</span></a>
+                {% endif %}
+            </div>
+            <div class="hashtags">
+                <p>#{{ post.category.name }}</p>
+            </div>
+            <h2 class="postTitle">{{ post.title }}</h2>
+            <div class="showComments">
+                <a href="javascript: loadPostComments('{{ post.id }}')">
+                    {% set likes = post.getNumComments() %}
+                    {{ likes }} {% if likes == 1 %} commento {% else %} commenti {% endif %}<i
+                        class="fas fa-angle-double-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

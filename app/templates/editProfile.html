@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.svg') }}">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/constants.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editProfile.css') }}">
+
+    <!-- JS -->
+    <script src="https://kit.fontawesome.com/100b505ca0.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="left">
+            <div class="logo">
+                <div class="link">
+                    <a href="{% if current_user.isAdmin() %}
+                    {{ url_for('admin_page') }}
+                    {% else %}
+                    {{ url_for('home_page') }}
+                    {% endif %}" class="logo">
+                        <svg width="50px" height="50px" id="Layer_1" data-name="Layer 1"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 866.03 966.51">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill: #fff;
+                                    }
+                                </style>
+                            </defs>
+                            <path class="cls-1"
+                                d="M878.9,218.76,554.11,31.24a108.23,108.23,0,0,0-108.22,0L121.1,218.76A108.23,108.23,0,0,0,67,312.49v375a108.23,108.23,0,0,0,54.11,93.73L445.89,968.76a108.23,108.23,0,0,0,108.22,0L878.9,781.24A108.23,108.23,0,0,0,933,687.51v-375A108.23,108.23,0,0,0,878.9,218.76ZM775.8,628a54.12,54.12,0,0,1-27.06,46.87l-221.68,128a54.16,54.16,0,0,1-54.12,0l-24-13.86a54.12,54.12,0,0,0-60.3,4.16L299,862.9a8,8,0,0,1-12.84-7.41L301.8,743a54.12,54.12,0,0,0-26.54-54.3l-24-13.85A54.12,54.12,0,0,1,224.2,628V372a54.12,54.12,0,0,1,27.06-46.87l221.68-128a54.16,54.16,0,0,1,54.12,0l221.68,128A54.12,54.12,0,0,1,775.8,372Z"
+                                transform="translate(-66.99 -16.74)" />
+                        </svg>
+                </div>
+            </div>
+            <div class="menu">
+                <div class="link">
+                    <a href="{{ url_for('home_page') }}">
+                        <i class="fas fa-home"></i>
+                        <p>Home</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="{{ url_for('category_page') }}">
+                        <i class="fas fa-boxes"></i>
+                        <p>Categorie</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="{{ url_for('likes_page') }}">
+                        <i class="fas fa-heart"></i>
+                        <p>Mi piace</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="{{ url_for('chat_page_noParams') }}">
+                        <i class="fas fa-comments"></i>
+                        <p>Messaggi</p>
+                    </a>
+                </div>
+                <div class="link">
+                    <a class="active" href="{{ url_for('myProfile_page') }}">
+                        <i class="fas fa-user"></i>
+                        <p>Profilo</p>
+                    </a>
+                </div>
+                <div class="link logoutInMenu">
+                    <a href="{{ url_for('logout_page') }}">
+                        <i class="fas fa-power-off"></i>
+                        <p>Log out</p>
+                    </a>
+                </div>
+            </div>
+            <div class="logout">
+                <div class="link">
+                    <a href="{{ url_for('logout_page') }}">
+                        <i class="fas fa-power-off"></i>
+                        <p>Log out</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="changePswdPopup">
+                <div class="form">
+                    <h1>Cambia Password</h1>
+
+                    <p id="error" class="error"></p>
+
+                    <div class="field oldPassword">
+                        <label for="oldPassword">Vecchia password:</label>
+                        <input type="password" id="oldPassword" name="oldPassword" placeholder="Vecchia password">
+                    </div>
+
+                    <div class="field newPassword">
+                        <label for="newPassword">Nuova password:</label>
+                        <input type="password" id="newPassword" name="newPassword" placeholder="Nuova password">
+                    </div>
+
+                    <div class="field confirmPassword">
+                        <label for="confirmPassword">Conferma password:</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword"
+                            placeholder="Conferma password">
+                    </div>
+                    <div class="actions">
+                        <button class="cancel" onclick="hidePswdPopup();">Annulla</button>
+                        <button onclick="changePswd();">Salva</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="profileContent">
+                <h1>Modifica profilo</h1>
+                <label for="profileImageFile" class="profileImageFile">
+                    <div class="userImage">
+                        <img id="myImg"
+                            src="{{ url_for('static', filename='users/' + current_user.username + '/imageUser.jpg') }}"
+                            alt="">
+                    </div>
+                </label>
+                <form action="{{ url_for('change_image') }}" enctype="multipart/form-data" method="POST" onchange="this.submit()">
+                    <input id="profileImageFile" type="file" name="profileImageFile" accept="image/*">
+                </form>
+                <div class="editPswdBtn">
+                    <button onclick="showPswdPopup();"><i class="fas fa-key"></i> Cambia Password</button>
+                </div>
+
+                <div class="field fieldName">
+                    <label for="name">Nome:</label>
+                    <input class="edit name" type="text" name="name" disabled="on" value="{{ current_user.name }}"
+                        onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));">
+                    <button class="edit" name="name" onclick="toggleEdit($(this));"><i class="fas fa-edit"></i></button>
+                </div>
+
+                <div class="field fieldLastname">
+                    <label for="lastname">Cognome:</label>
+                    <input class="edit lastname" type="text" name="lastname" disabled="on"
+                        value="{{ current_user.lastname }}"
+                        onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));">
+                    <button class="edit" name="lastname" onclick="toggleEdit($(this));"><i
+                            class="fas fa-edit"></i></button>
+                </div>
+
+                <div class="field fieldUsername">
+                    <label for="username">Username:</label>
+                    <input class="edit username" type="text" name="username" disabled="on"
+                        value="{{ current_user.username }}"
+                        onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 46 || event.charCode == 95 || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));">
+                    <button class="edit" name="username" onclick="toggleEdit($(this));"><i
+                            class="fas fa-edit"></i></button>
+                </div>
+
+                <div class="field fieldEmail">
+                    <label for="email">Email:</label>
+                    <input class="edit email" type="email" name="email" disabled="off" value="{{ current_user.email }}"
+                        onkeypress="return ((event.charCode > 63 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 46 || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));">
+                    <button class="edit" name="email" onclick="toggleEdit($(this));"><i
+                            class="fas fa-edit"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="right"></div>
+    </div>
+
+    <script>
+        function resetImage() {
+            document.getElementById("myImg").src =
+                "https://eu.ui-avatars.com/api/?name={{current_user.name}}+{{current_user.lastname}}&format=svg&bold=true";
+            document.getElementById("profileImageFile").value = null;
+        }
+
+        $(function () {
+            $(":file").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = imageIsLoaded;
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+
+        function imageIsLoaded(e) {
+            $('#myImg').attr('src', e.target.result);
+        };
+    </script>
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/editProfile.js') }}"></script>
+</body>
+
+</html>

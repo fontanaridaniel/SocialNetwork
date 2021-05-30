@@ -1,0 +1,234 @@
+input.edit {
+    border-radius: var(--borderRadius) 0 0 var(--borderRadius);
+    width: 240px;
+}
+
+input.edit:focus {
+    border-left: 2px solid var(--defaultGreen) !important;
+    border-top: 2px solid var(--defaultGreen) !important;
+    border-bottom: 2px solid var(--defaultGreen) !important;
+    border-right: 0 !important;
+}
+
+button.edit {
+    border-radius: 0 var(--borderRadius) var(--borderRadius) 0;
+    width: 48px;
+}
+
+input:disabled {
+    opacity: 0.7;
+    color: #555555;
+}
+
+.center .profileContent {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    padding: 24px;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-auto-rows: max-content;
+    row-gap: 16px;
+    column-gap: 48px;
+    justify-items: center;
+    transition: filter var(--transitionTime);
+}
+
+
+.center .profileContent h1 {
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+.center .profileContent .profileImageFile {
+    grid-column: 1/2;
+    grid-row: 2/5;
+}
+
+.center .profileContent .editPswdBtn {
+    grid-column: 1/2;
+    grid-row: 5/6;
+    align-self: end;
+}
+
+.center .profileContent .fieldName {
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.center .profileContent .fieldLastname {
+    grid-column: 2/3;
+    grid-row: 3/4;
+}
+
+.center .profileContent .fieldUsername {
+    grid-column: 2/3;
+    grid-row: 4/5;
+}
+
+.center .profileContent .fieldEmail {
+    grid-column: 2/3;
+    grid-row: 5/6;
+}
+
+
+.center .profileContent input[type="file"] {
+    display: none;
+}
+
+.center .profileContent label .userImage {
+    width: 224px;
+    height: 224px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.center .profileContent label .userImage:hover {
+    opacity: 0.7;
+}
+
+.center .profileContent label .userImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.center .field {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: repeat(2, max-content);
+    row-gap: 4px;
+}
+
+.center .field label {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    margin-left: 4px;
+    font-weight: bold;
+}
+
+.center .field input {
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+.center .field button {
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.center {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+}
+
+.changePswdPopup {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    display: grid;
+    display: none;
+}
+
+.changePswdPopup h1 {
+    text-align: center;
+}
+
+.changePswdPopup .error {
+    display: block;
+    font-size: 14px;
+    background: var(--defaultRed);
+    color: #ffffff;
+    width: max-content;
+    margin: 0 auto;
+    padding: 2px 8px;
+    border-radius: 9999px;
+
+}
+
+.changePswdPopup .error p {
+    padding: 2px 8px;
+}
+
+.changePswdPopup .field {
+    width: 100%;
+    grid-template-columns: 1fr;
+}
+
+.changePswdPopup .form {
+    display: grid;
+    justify-items: center;
+    grid-gap: 16px;
+    background: var(--backgroundColor);
+    width: max-content;
+    height: max-content;
+    padding: 16px;
+    border-radius: var(--borderRadius);
+    -webkit-box-shadow: var(--defaultBoxShadow);
+    -moz-box-shadow: var(--defaultBoxShadow);
+    box-shadow: var(--defaultBoxShadow);
+    align-self: center;
+    justify-self: center;
+}
+
+.changePswdPopup .actions {
+    text-align: right;
+    width: 100%;
+}
+
+.changePswdPopup .actions .cancel {
+    background: var(--defaultRedBtn);
+}
+
+@media only screen and (max-width: 820px) {
+    .center .profileContent {
+        grid-column: 1/2;
+        grid-row: 1/2;
+        padding: 16px;
+        grid-template-columns: 1fr;
+        grid-auto-rows: max-content;
+    }
+
+    .center .profileContent input.edit {
+        width: 100%;
+    }
+
+    .center .profileContent h1 {
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+
+    .center .profileContent .profileImageFile {
+        grid-column: 1/2;
+        grid-row: 2/3;
+    }
+
+    .center .profileContent .editPswdBtn {
+        grid-column: 1/2;
+        grid-row: 7/8;
+    }
+
+    .center .profileContent .fieldName {
+        grid-column: 1/2;
+        grid-row: 3/4;
+    }
+
+    .center .profileContent .fieldLastname {
+        grid-column: 1/2;
+        grid-row: 4/5;
+    }
+
+    .center .profileContent .fieldUsername {
+        grid-column: 1/2;
+        grid-row: 5/6;
+    }
+
+    .center .profileContent .fieldEmail {
+        grid-column: 1/2;
+        grid-row: 6/7;
+    }
+}

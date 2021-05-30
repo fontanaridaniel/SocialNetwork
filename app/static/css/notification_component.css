@@ -1,0 +1,89 @@
+:Root {
+    --notificationBackgroundColor: var(--mainColorNotGradient);
+    --notificationTextColor: var(--secondaryTextColor);
+}
+
+.notifyTest {
+    position: absolute;
+}
+
+.notification {
+    background: var(--notificationBackgroundColor);
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: max-content;
+    width: max-content;
+    padding: 8px;
+    border-radius: 16px;
+    color: var(--notificationTextColor);
+    position: absolute;
+    left: calc(50% - 141px);
+    z-index: 9999;
+    top: -400px;
+    transition: top 0.5s;
+}
+
+.notification .content {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: max-content;
+    column-gap: 8px;
+    row-gap: 4px;
+}
+
+.notification:hover {
+    cursor: pointer;
+    opacity: 0.92;
+    filter: brightness(1.2);
+}
+
+.notification .userImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    grid-column: 1/2;
+    grid-row: 1/3;
+}
+
+.notification .userImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.notification .username {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.notification .username p {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 21px;
+}
+
+.notification .message {
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.notification .message p {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 16px;
+    font-size: 14px;
+}
+
+.notification .closeNotification {
+    grid-column: 3/4;
+    grid-row: 1/2;
+}
+
+.notification .closeNotification a {
+    color: var(--notificationTextColor);
+}

@@ -1,0 +1,154 @@
+* {
+    box-sizing: border-box;
+}
+
+body,
+html {
+    font-family: var(--defaultFont);
+    width: 100%;
+    height: 100%;
+}
+
+h1 {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: bold;
+}
+
+button {
+    background: var(--defaultBtnBackgroundColor);
+    color: var(--defaultBtnTextColor);
+    height: 40px;
+    padding: 0 16px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 24px;
+    outline: none;
+    border: none;
+}
+
+button,
+a {
+    cursor: pointer;
+    transition: opacity var(--transitionTime);
+    text-decoration: none;
+}
+
+button:hover,
+a:hover {
+    opacity: 0.7;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    box-shadow: 0 0 0 30px var(--inputBarBackgroundColor) inset !important;
+    -webkit-box-shadow: 0 0 0 30px var(--inputBarBackgroundColor) inset !important;
+    -webkit-text-fill-color: var(--inputBarTextColor) !important;
+    outline: none;
+}
+
+input[type=text],
+input[type=email],
+input[type=password],
+textarea {
+    font-family: var(--defaultFont);
+    height: 40px;
+    border-radius: 24px;
+    border: 2px solid var(--inputBarBackgroundColor);
+    background: var(--inputBarBackgroundColor);
+    color: var(--inputBarTextColor);
+    outline: none;
+    padding: 0 16px;
+    font-size: 16px;
+    resize: none;
+}
+
+textarea {
+    padding: 16px;
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus,
+textarea:focus {
+    border: 2px solid var(--inputBarBorderColor);
+}
+
+input[type=text]::placeholder,
+input[type=email]::placeholder,
+input[type=password]::placeholder,
+textarea::placeholder {
+    font-family: var(--defaultFont);
+    color: var(--inputBarPlaceholderColor);
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accentColor);
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-track-piece:start {
+    border-radius: 9999px;
+    background: var(--backgroundColor);
+}
+
+::-webkit-scrollbar-track-piece:end {
+    border-radius: 9999px;
+    background: var(--backgroundColor);
+}
+
+.home {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-auto-rows: max-content;
+    grid-gap: 40px;
+    padding: 24px;
+    color: var(--homeTextColor);
+}
+
+.sectionTitle {
+    margin-bottom: 16px;
+}
+
+.scrollToTopBtn {
+    position: fixed;
+    z-index: 200;
+    display: none;
+    bottom: 24px;
+    width: 48px;
+    height: 48px;
+}
+
+section {
+    width: 100%;
+}
+
+@media only screen and (max-width: 650px) {
+    .scrollToTopBtn {
+        position: fixed;
+        z-index: 200;
+        display: none;
+        bottom: 72px;
+        right: 8px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .home {
+        padding: 16px;
+        justify-items: center;
+    }
+}

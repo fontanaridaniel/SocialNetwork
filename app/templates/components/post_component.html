@@ -1,0 +1,63 @@
+{% for post in post_list %}
+<div name="{{ post[0].owner.username }}" class="post">
+    <div class="postImage">
+        <img src="{{ url_for('static', filename='users/' + post[0].owner.username + '/posts/' + post[0].id|string + '.jpg') }}"
+            alt="postImage">
+    </div>
+    <div class="postHeader">
+        <a class="userImage" href="javascript: loadProfile('{{post[0].owner.username}}')">
+            <img src="{{ url_for('static', filename='users/' + post[0].owner.username + '/imageUser.jpg') }}"
+                alt="userImage">
+        </a>
+        <div class="userName">
+            <a href="javascript: loadProfile('{{post[0].owner.username}}')">{{ post[0].owner.name }} {{
+                post[0].owner.lastname
+                }}</a>
+        </div>
+        <p class="postDate">{{ post[0].getPostDate() }}</p>
+    </div>
+    <div class="postBody">
+        <div class="actionsBtn">
+            {% if post[2] %}
+            <a href="javascript: toggleLike('{{post[0].id}}')"><i name="{{post[0].id}}" class="fas fa-heart"></i> Mi
+                piace <span name="{{post[0].id}}">{{
+            post[1] }}</span></a>
+            {% else %}
+            <a href="javascript: toggleLike('{{post[0].id}}')"><i name="{{post[0].id}}" class="far fa-heart"></i> Mi
+                piace <span name="{{post[0].id}}">{{
+                post[1] }}</span></a>
+            {% endif %}
+        </div>
+        <div class="hashtags">
+            <p>#{{ post[0].category.name }}</p>
+        </div>
+        <h2 class="postTitle">{{ post[0].title }}</h2>
+
+
+        
+        <div class="comments"><div class="content"><div class="commentsList">
+            {% for comment in post[3] %}
+            <div class="comment">
+                <div class="userImage"><a href="javascript: loadProfile('{{ comment.owner.username }}')"><img
+                            src="/app/users/{{ comment.owner.username }}/imageUser.jpg" alt="userImage"></a>
+                </div>
+                <div class="userName"><a
+                        href="javascript: loadProfile('{{ comment.owner.username }}')">{{ comment.owner.username }}</a>
+                </div>
+                <div class="text">{{ comment.text }}</div>
+            </div>
+            {% endfor %}
+        </div></div></div>
+        
+
+
+        <div class="showComments">
+            <a href="javascript: loadPostComments('{{ post[0].id }}', true)">
+                {% set likes = post[0].getNumComments() %}
+                {{ likes }} {% if likes == 1 %} commento {% else %} commenti {% endif %}<i
+                    class="fas fa-angle-double-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
+{% endfor %}
